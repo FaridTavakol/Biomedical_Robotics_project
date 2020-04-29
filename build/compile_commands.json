@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build",
+  "command": "/usr/bin/clang++-6.0   -I\"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics\"  -g   -o CMakeFiles/NeuroKinematics.dir/NeuroKinematics/NeuroKinematics.cpp.o -c \"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.cpp\"",
+  "file": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.cpp"
+},
+{
+  "directory": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build",
+  "command": "/usr/bin/clang++-6.0   -I\"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics\" -isystem /usr/include/python2.7 -isystem /usr/lib/python2.7/dist-packages/numpy/core/include  -g   -o CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.o -c \"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/ForwardKinematics.cpp\"",
+  "file": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/ForwardKinematics.cpp"
+}
+]

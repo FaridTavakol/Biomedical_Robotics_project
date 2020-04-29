@@ -1,0 +1,68 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Kinematics",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ForwardKinematics::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ForwardKinematics-Debug-fe8807d5542d15227241.json",
+					"name" : "ForwardKinematics",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NeuroKinematics::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NeuroKinematics-Debug-447b7ccbd38f3ae0c9d6.json",
+					"name" : "NeuroKinematics",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build",
+		"source" : "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

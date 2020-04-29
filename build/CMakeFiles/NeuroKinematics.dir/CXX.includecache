@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/Kinematics.hpp
+
+/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.cpp
+NeuroKinematics.hpp
+/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.hpp
+
+/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.hpp
+math.h
+-
+string
+-
+iostream
+-
+stdio.h
+-
+stdint.h
+-
+stdlib.h
+-
+../Kinematics.hpp
+/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/Kinematics.hpp
+eigen3/Eigen/Dense
+-
+
