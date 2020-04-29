@@ -13,6 +13,8 @@ iostream
 -
 string
 -
+math.h
+-
 matplotlibcpp.h
 /home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/matplotlibcpp.h
 
