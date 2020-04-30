@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <math.h> /* isnan, sqrt */
+#include <cstdlib>
 #include "matplotlibcpp.h"
 namespace plt = matplotlibcpp;
 
@@ -51,27 +52,11 @@ int main()
   // Lateral Translation range : -49.47 - 0.00
   // Axial Head Translation range : -145.01 - 0.00
   // Axial Feet Translation range : -70.00 - 75.01 -> Experimental range from -7 to 233 inclusive
-  Neuro_FK_outputs FK{};
-  // FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-  //                                LateralTranslation, ProbeInsertion,
-  //                                ProbeRotation, PitchRotation, YawRotation);
-  // std::cout << "Z Position :\n"
-  //           << FK.zFrameToTreatment << std::endl;
-  // AxialHeadTranslation = -70;
-  // FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-  //                                LateralTranslation, ProbeInsertion,
-  //                                ProbeRotation, PitchRotation, YawRotation);
-  // std::cout << "Z Position :\n"
-  //           << FK.zFrameToTreatment << std::endl;
-  // AxialHeadTranslation = -60;
-  // FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-  //                                LateralTranslation, ProbeInsertion,
-  //                                ProbeRotation, PitchRotation, YawRotation);
-  // std::cout << "Z Position :\n"
-  //           << FK.zFrameToTreatment << std::endl;
-  // Max allowed seperation  146mm
-  // Min allowed seperation 75mm
-  double i{}, j{}, k{}, l{};
+
+  Neuro_FK_outputs FK{}; // object for the forward kinematics output
+
+  // loop for visualizing the bottom
+  double i{}, j{}, k{}, l{}; // initializing the counters
 
   for (i = 0, j = 0; i < 87; ++i, ++j) //75
   {
@@ -100,5 +85,76 @@ int main()
     }
   }
 
+  // Loop for visualizing the top
+  for (i = 0, j = -71; i < 201; ++i, ++j) //75
+  {
+    AxialFeetTranslation = i;
+    AxialHeadTranslation = j;
+    for (k = 0; k <= 37.5; k += 0.5)
+    {
+      LateralTranslation = k;
+      FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                     LateralTranslation, ProbeInsertion,
+                                     ProbeRotation, PitchRotation, YawRotation);
+      if (isnan(FK.zFrameToTreatment(1, 3)))
+      {
+        std::cout << "Y is out of range!\n";
+        break;
+      }
+      if (i == 0 | i == 86)
+      {
+        std::cout << "\ni is :" << i << " ,";
+        std::cout << "j is :" << j << " ,";
+        std::cout << "k is :" << k << std::endl;
+        std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
+        std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
+        std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+      }
+    }
+  }
+  // Min allowed seperation 75mm
+  // Max allowed seperation  146mm
+  double Diff{71}; //146-75 =  mm
+  AxialFeetTranslation = 0;
+  AxialHeadTranslation = 0;
+
+  int nan_checker_row{};
+  int nan_checker_col{};
+  i = 0;
+  j = -1;
+  k = 0;
+  // Loop for creating the feet face
+  for (j = -1; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); --j)
+  {
+    AxialHeadTranslation = j;
+    for (k = 0; k <= 37.5; k += 0.5)
+    {
+      LateralTranslation = k;
+      FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                     LateralTranslation, ProbeInsertion,
+                                     ProbeRotation, PitchRotation, YawRotation);
+      for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
+      {
+        for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
+        {
+
+          if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
+          {
+            std::cout << "row :" << nan_checker_row << "cloumn :"
+                      << "is nan!\n";
+            break;
+          }
+        }
+      }
+
+      std::cout << "\ni is :" << i << " ,";
+      std::cout << "j is :" << j << " ,";
+      std::cout << "k is :" << k << std::endl;
+      std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
+      std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
+      std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+      std::cout << "Head Position :" << AxialHeadTranslation << std::endl;
+    }
+  }
   return 0;
 }
