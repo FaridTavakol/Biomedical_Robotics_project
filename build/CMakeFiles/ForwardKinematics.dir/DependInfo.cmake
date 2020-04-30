@@ -4,20 +4,18 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/ForwardKinematics.cpp" "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.o"
+  "/home/kamerider/Biomedical_Robotics_project/ForwardKinematics.cpp" "/home/kamerider/Biomedical_Robotics_project/build/CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "Clang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../NeuroKinematics"
-  "/usr/include/python2.7"
-  "/usr/lib/python2.7/dist-packages/numpy/core/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles/NeuroKinematics.dir/DependInfo.cmake"
+  "/home/kamerider/Biomedical_Robotics_project/build/CMakeFiles/NeuroKinematics.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

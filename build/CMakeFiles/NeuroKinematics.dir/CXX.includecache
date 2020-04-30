@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/Kinematics.hpp
+/home/kamerider/Biomedical_Robotics_project/Kinematics.hpp
 
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.cpp
+/home/kamerider/Biomedical_Robotics_project/NeuroKinematics/NeuroKinematics.cpp
 NeuroKinematics.hpp
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.hpp
+/home/kamerider/Biomedical_Robotics_project/NeuroKinematics/NeuroKinematics.hpp
 
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.hpp
+/home/kamerider/Biomedical_Robotics_project/NeuroKinematics/NeuroKinematics.hpp
 math.h
 -
 string
@@ -26,7 +26,7 @@ stdint.h
 stdlib.h
 -
 ../Kinematics.hpp
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/Kinematics.hpp
+/home/kamerider/Biomedical_Robotics_project/Kinematics.hpp
 eigen3/Eigen/Dense
 -
 

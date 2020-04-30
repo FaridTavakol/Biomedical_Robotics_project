@@ -1,12 +1,12 @@
 [
 {
-  "directory": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build",
-  "command": "/usr/bin/clang++-6.0   -I\"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics\"  -g   -o CMakeFiles/NeuroKinematics.dir/NeuroKinematics/NeuroKinematics.cpp.o -c \"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.cpp\"",
-  "file": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.cpp"
+  "directory": "/home/kamerider/Biomedical_Robotics_project/build",
+  "command": "/usr/bin/g++-7   -I/home/kamerider/Biomedical_Robotics_project/NeuroKinematics  -g   -o CMakeFiles/NeuroKinematics.dir/NeuroKinematics/NeuroKinematics.cpp.o -c /home/kamerider/Biomedical_Robotics_project/NeuroKinematics/NeuroKinematics.cpp",
+  "file": "/home/kamerider/Biomedical_Robotics_project/NeuroKinematics/NeuroKinematics.cpp"
 },
 {
-  "directory": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build",
-  "command": "/usr/bin/clang++-6.0   -I\"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics\" -isystem /usr/include/python2.7 -isystem /usr/lib/python2.7/dist-packages/numpy/core/include  -g   -o CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.o -c \"/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/ForwardKinematics.cpp\"",
-  "file": "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/ForwardKinematics.cpp"
+  "directory": "/home/kamerider/Biomedical_Robotics_project/build",
+  "command": "/usr/bin/g++-7   -I/home/kamerider/Biomedical_Robotics_project/NeuroKinematics  -g   -o CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.o -c /home/kamerider/Biomedical_Robotics_project/ForwardKinematics.cpp",
+  "file": "/home/kamerider/Biomedical_Robotics_project/ForwardKinematics.cpp"
 }
 ]

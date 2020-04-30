@@ -1,0 +1,608 @@
+
+X Position :18.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :18.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :19.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :19.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :20.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :20.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :21.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :21.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :22.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :22.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :23.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :23.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :24.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :24.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :25.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :25.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :26.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :26.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :27.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :27.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :28.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :28.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :29.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :29.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :30.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :30.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :31.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :31.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :32.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :32.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :33.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :33.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :34.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :34.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :35.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :35.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :36.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :36.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :37.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :37.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :38.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :38.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :39.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :39.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :40.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :40.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :41.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :41.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :42.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :42.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :43.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :43.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :44.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :44.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :45.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :45.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :46.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :46.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :47.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :47.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :48.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :48.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :49.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :49.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :50.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :50.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :51.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :51.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :52.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :52.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :53.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :53.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :54.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :54.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :55.32
+Y Position :209.89
+Z Position :72.91
+
+X Position :55.82
+Y Position :209.89
+Z Position :72.91
+
+X Position :18.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :18.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :19.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :19.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :20.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :20.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :21.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :21.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :22.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :22.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :23.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :23.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :24.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :24.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :25.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :25.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :26.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :26.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :27.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :27.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :28.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :28.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :29.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :29.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :30.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :30.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :31.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :31.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :32.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :32.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :33.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :33.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :34.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :34.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :35.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :35.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :36.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :36.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :37.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :37.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :38.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :38.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :39.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :39.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :40.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :40.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :41.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :41.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :42.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :42.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :43.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :43.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :44.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :44.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :45.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :45.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :46.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :46.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :47.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :47.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :48.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :48.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :49.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :49.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :50.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :50.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :51.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :51.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :52.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :52.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :53.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :53.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :54.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :54.82
+Y Position :209.89
+Z Position :158.91
+
+X Position :55.32
+Y Position :209.89
+Z Position :158.91
+
+X Position :55.82
+Y Position :209.89
+Z Position :158.91

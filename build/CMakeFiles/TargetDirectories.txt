@@ -1,4 +1,4 @@
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles/edit_cache.dir
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles/NeuroKinematics.dir
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles/rebuild_cache.dir
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles/ForwardKinematics.dir
+/home/kamerider/Biomedical_Robotics_project/build/CMakeFiles/edit_cache.dir
+/home/kamerider/Biomedical_Robotics_project/build/CMakeFiles/NeuroKinematics.dir
+/home/kamerider/Biomedical_Robotics_project/build/CMakeFiles/rebuild_cache.dir
+/home/kamerider/Biomedical_Robotics_project/build/CMakeFiles/ForwardKinematics.dir

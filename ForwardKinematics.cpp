@@ -2,8 +2,11 @@
 #include <iostream>
 #include <string>
 #include <math.h> /* isnan, sqrt */
-#include "matplotlibcpp.h"
-namespace plt = matplotlibcpp;
+
+#include <fstream>
+
+// #include "matplotlibcpp.h"
+// namespace plt = matplotlibcpp;
 
 // Initializing the joint variables for use in the FK function
 double AxialHeadTranslation{0.0};
@@ -73,6 +76,9 @@ int main()
   // Min allowed seperation 75mm
   double i{}, j{}, k{}, l{};
 
+  using namespace std;
+  ofstream myout("test.xyz");
+
   for (i = 0, j = 0; i < 87; ++i, ++j) //75
   {
     AxialFeetTranslation = i;
@@ -96,9 +102,13 @@ int main()
         std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
         std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
         std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+
+        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
       }
     }
   }
+
+  myout.close();
 
   return 0;
 }
