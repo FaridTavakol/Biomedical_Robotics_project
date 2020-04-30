@@ -94,8 +94,8 @@ int main()
         std::cout << "Y is out of range!\n";
         break;
       }
-      if (i == 0 | i == 86)
-      {
+      // if (i == 0 | i == 86)
+      // {
         std::cout << "\ni is :" << i << " ,";
         std::cout << "j is :" << j << " ,";
         std::cout << "k is :" << k << std::endl;
@@ -104,7 +104,7 @@ int main()
         std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
 
         myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
-      }
+      // }
     }
   }
 
