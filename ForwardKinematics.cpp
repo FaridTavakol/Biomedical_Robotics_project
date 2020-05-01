@@ -123,7 +123,7 @@ int main()
   }
   // Min allowed seperation 75mm
   // Max allowed seperation  146mm
-  double Diff{71}; //146-75 =  mm
+  const double Diff{71}; //146-75 =  mm
   AxialFeetTranslation = 0;
   AxialHeadTranslation = 0;
 
@@ -166,6 +166,111 @@ int main()
 
       myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
     }
+  }
+
+  // Loop for creating the Head face
+  // j = 200 i = 200 i++ 71 = 271 ;
+  AxialHeadTranslation = 200;
+  AxialFeetTranslation = 200;
+  nan_checker_row = 0;
+  nan_checker_col = 0;
+  i = 200;
+  j = 200;
+  k = 0;
+
+  for (i = 201; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); ++i)
+  {
+    AxialFeetTranslation = i;
+    for (k = 0; k <= 37.5; k += 0.5)
+    {
+      LateralTranslation = k;
+      FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                     LateralTranslation, ProbeInsertion,
+                                     ProbeRotation, PitchRotation, YawRotation);
+      for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
+      {
+        for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
+        {
+
+          if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
+          {
+            std::cout << "row :" << nan_checker_row << "cloumn :"
+                      << "is nan!\n";
+            break;
+          }
+        }
+      }
+
+      std::cout << "\ni is :" << i << " ,";
+      std::cout << "j is :" << j << " ,";
+      std::cout << "k is :" << k << std::endl;
+      std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
+      std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
+      std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+      std::cout << "Feet Position :" << AxialFeetTranslation << std::endl;
+
+      myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+    }
+  }
+
+  //loop for creating the sides
+  AxialFeetTranslation = 0;
+  AxialHeadTranslation = 0;
+  LateralTranslation = 0;
+  nan_checker_row = 0;
+  nan_checker_col = 0;
+  i = 0;
+  j = -1;
+  k = 0;
+  double ii{};
+  // double jj{};
+  double min_travel{86};
+  double max_travel{200};
+  // double Old_AxialHeadTranslation{};
+  for (j = -1; Diff > abs(j); --j)
+  {
+    AxialHeadTranslation = j;
+    ++min_travel;
+
+    for (ii = 0; ii <= min_travel && min_travel <= max_travel; ++ii)
+    {
+      ++AxialHeadTranslation;
+      ++AxialFeetTranslation;
+
+      for (k = 0; k <= 37.5; k += 37.5)
+      {
+        LateralTranslation = k;
+        FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                       LateralTranslation, ProbeInsertion,
+                                       ProbeRotation, PitchRotation, YawRotation);
+        for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
+        {
+          for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
+          {
+
+            if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
+            {
+              std::cout << "row :" << nan_checker_row << "cloumn :"
+                        << "is nan!\n";
+              break;
+            }
+          }
+        }
+
+        std::cout << "\ni is :" << i << " ,";
+        std::cout << "j is :" << j << " ,";
+        std::cout << "k is :" << k << std::endl;
+        std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
+        std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
+        std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+        std::cout << "Head Position :" << AxialHeadTranslation << std::endl;
+
+        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+      }
+    }
+    AxialHeadTranslation = 0;
+    AxialFeetTranslation = 0;
+    LateralTranslation = 0;
   }
 
   myout.close();
