@@ -170,15 +170,15 @@ int main()
 
   // Loop for creating the Head face
   // j = 200 i = 200 i++ 71 = 271 ;
-  AxialHeadTranslation = 200;
-  AxialFeetTranslation = 200;
+  AxialHeadTranslation = 0;
+  AxialFeetTranslation = 0;
   nan_checker_row = 0;
   nan_checker_col = 0;
-  i = 200;
-  j = 200;
+  i = 86;
+  j = 86;
   k = 0;
 
-  for (i = 201; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); ++i)
+  for (i = 87; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); ++i)
   {
     AxialFeetTranslation = i;
     for (k = 0; k <= 37.5; k += 0.5)
