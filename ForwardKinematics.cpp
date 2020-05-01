@@ -156,5 +156,48 @@ int main()
       std::cout << "Head Position :" << AxialHeadTranslation << std::endl;
     }
   }
+
+  // Loop for creating the Head face
+  // j = 200 i = 200 i++ 71 = 271 ;
+  AxialHeadTranslation = 200;
+  AxialFeetTranslation = 200;
+  nan_checker_row = 0;
+  nan_checker_col = 0;
+  i = 200;
+  j = 200;
+  k = 0;
+
+  for (i = 201; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); ++i)
+  {
+    AxialFeetTranslation = i;
+    for (k = 0; k <= 37.5; k += 0.5)
+    {
+      LateralTranslation = k;
+      FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                     LateralTranslation, ProbeInsertion,
+                                     ProbeRotation, PitchRotation, YawRotation);
+      for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
+      {
+        for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
+        {
+
+          if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
+          {
+            std::cout << "row :" << nan_checker_row << "cloumn :"
+                      << "is nan!\n";
+            break;
+          }
+        }
+      }
+
+      std::cout << "\ni is :" << i << " ,";
+      std::cout << "j is :" << j << " ,";
+      std::cout << "k is :" << k << std::endl;
+      std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
+      std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
+      std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+      std::cout << "Feet Position :" << AxialFeetTranslation << std::endl;
+    }
+  }
   return 0;
 }
