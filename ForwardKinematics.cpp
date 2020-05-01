@@ -93,7 +93,7 @@ int main()
   }
 
   // Loop for visualizing the top
-  for (i = 0, j = -71; i < 201; ++i, ++j) //75
+  for (i = 0, j = -71; i < 157; ++i, ++j) //75
   {
     AxialFeetTranslation = i;
     AxialHeadTranslation = j;
@@ -170,8 +170,8 @@ int main()
 
   // Loop for creating the Head face
   // j = 200 i = 200 i++ 71 = 271 ;
-  AxialHeadTranslation = 0;
-  AxialFeetTranslation = 0;
+  AxialHeadTranslation = 86;
+  AxialFeetTranslation = 86;
   nan_checker_row = 0;
   nan_checker_col = 0;
   i = 86;
