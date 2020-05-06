@@ -1,0 +1,1 @@
+/usr/bin/clang++-6.0  -g  -rdynamic CMakeFiles/InverseKinematics.dir/InverseKinematics.cpp.o  -o InverseKinematics libNeuroKinematics.a 

@@ -3,8 +3,8 @@
 #include <string>
 #include <math.h> /* isnan, sqrt */
 #include <cstdlib>
-#include "matplotlibcpp.h"
-namespace plt = matplotlibcpp;
+// #include "matplotlibcpp.h"
+// namespace plt = matplotlibcpp;
 
 // Initializing the joint variables for use in the FK function
 double AxialHeadTranslation{0.0};
@@ -19,6 +19,7 @@ double ProbeRotation{0.0};
 // C is cannula to treatment, we define this so the robot can compute the cannula length,// C = 5mm
 // D is the robot to treatment distance,// D = 41mm
 // Creating an object called Forward for FK
+// In the neuroRobot.cpp the specs for the  probe are: 0,0,5,41
 double _cannulaToTreatment{5.0};
 double _treatmentToTip{10.0};
 double _robotToEntry{5.0};
@@ -43,8 +44,8 @@ Probe probe_init = {
 
 int main()
 {
-  Probe *probe1{&probe_init}; // Creating a pointer Probe1 of type Probe that points to the address of probe_init
-  NeuroKinematics Forward(probe1);
+  // Probe *probe1{&probe_init}; // Creating a pointer Probe1 of type Probe that points to the address of probe_init
+  NeuroKinematics Forward(&probe_init);
   // Yaw rotation range : -1.54 - +0.01
   // Probe Rotation range : -6.28 - +6.28
   // Pitch Rotation range : -0.46 - 0.65
@@ -86,7 +87,7 @@ int main()
   }
 
   // Loop for visualizing the top
-  for (i = 0, j = -71; i < 201; ++i, ++j) //75
+  for (i = 0, j = -71; i < 157; ++i, ++j) // 201 to 157 it should be 201 based on the paper
   {
     AxialFeetTranslation = i;
     AxialHeadTranslation = j;
@@ -101,7 +102,7 @@ int main()
         std::cout << "Y is out of range!\n";
         break;
       }
-      if (i == 0 | i == 86)
+      if (i == 0 | i == 156)
       {
         std::cout << "\ni is :" << i << " ,";
         std::cout << "j is :" << j << " ,";
@@ -114,7 +115,7 @@ int main()
   }
   // Min allowed seperation 75mm
   // Max allowed seperation  146mm
-  const double Diff{71}; //146-75 =  mm
+  const double Diff{71}; // Is the max allowed movement while one block is stationary 146-75 = 71 mm
   AxialFeetTranslation = 0;
   AxialHeadTranslation = 0;
 
@@ -146,21 +147,20 @@ int main()
           }
         }
       }
-
-      std::cout << "\ni is :" << i << " ,";
-      std::cout << "j is :" << j << " ,";
-      std::cout << "k is :" << k << std::endl;
-      std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-      std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-      std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
-      std::cout << "Head Position :" << AxialHeadTranslation << std::endl;
     }
+    std::cout << "\ni is :" << i << " ,";
+    std::cout << "j is :" << j << " ,";
+    std::cout << "k is :" << k << std::endl;
+    std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
+    std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
+    std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+    std::cout << "Head Position :" << AxialHeadTranslation << std::endl;
   }
 
   // Loop for creating the Head face
   // j = 200 i = 200 i++ 71 = 271 ;
-  AxialHeadTranslation = 0;
-  AxialFeetTranslation = 0;
+  AxialHeadTranslation = 86;
+  AxialFeetTranslation = 86;
   nan_checker_row = 0;
   nan_checker_col = 0;
   i = 86;
@@ -257,6 +257,18 @@ int main()
     AxialFeetTranslation = 0;
     LateralTranslation = 0;
   }
+  // =================================Desired point checker =============================================================================
+  AxialFeetTranslation = -66.1631;
+  AxialHeadTranslation = -81.8432;
+  LateralTranslation = -194.86;
+  FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                 LateralTranslation, ProbeInsertion,
+                                 ProbeRotation, PitchRotation, YawRotation);
+  std::cout << "zFrameToTreatment :" << FK.zFrameToTreatment << std::endl;
+
+  std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
+  std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
+  std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
 
   return 0;
 }

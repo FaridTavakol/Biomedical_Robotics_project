@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/ForwardKinematics.cpp
+/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/InverseKinematics.cpp
 NeuroKinematics/NeuroKinematics.hpp
 /home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.hpp
 iostream
@@ -16,6 +16,8 @@ string
 math.h
 -
 cstdlib
+-
+eigen3/Eigen/Dense
 -
 
 /home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/Kinematics.hpp

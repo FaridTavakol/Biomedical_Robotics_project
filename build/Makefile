@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = "/home/aimlab/Documents/Courses/Biomedical Engineering/projec
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/lib/python3.6/dist-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/lib/python3.6/dist-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -124,44 +124,44 @@ NeuroKinematics/fast:
 .PHONY : NeuroKinematics/fast
 
 #=============================================================================
-# Target rules for targets named ForwardKinematics
+# Target rules for targets named InverseKinematics
 
 # Build rule for target.
-ForwardKinematics: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ForwardKinematics
-.PHONY : ForwardKinematics
+InverseKinematics: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 InverseKinematics
+.PHONY : InverseKinematics
 
 # fast build rule for target.
-ForwardKinematics/fast:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/build
-.PHONY : ForwardKinematics/fast
+InverseKinematics/fast:
+	$(MAKE) -f CMakeFiles/InverseKinematics.dir/build.make CMakeFiles/InverseKinematics.dir/build
+.PHONY : InverseKinematics/fast
 
-ForwardKinematics.o: ForwardKinematics.cpp.o
+InverseKinematics.o: InverseKinematics.cpp.o
 
-.PHONY : ForwardKinematics.o
+.PHONY : InverseKinematics.o
 
 # target to build an object file
-ForwardKinematics.cpp.o:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.o
-.PHONY : ForwardKinematics.cpp.o
+InverseKinematics.cpp.o:
+	$(MAKE) -f CMakeFiles/InverseKinematics.dir/build.make CMakeFiles/InverseKinematics.dir/InverseKinematics.cpp.o
+.PHONY : InverseKinematics.cpp.o
 
-ForwardKinematics.i: ForwardKinematics.cpp.i
+InverseKinematics.i: InverseKinematics.cpp.i
 
-.PHONY : ForwardKinematics.i
+.PHONY : InverseKinematics.i
 
 # target to preprocess a source file
-ForwardKinematics.cpp.i:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.i
-.PHONY : ForwardKinematics.cpp.i
+InverseKinematics.cpp.i:
+	$(MAKE) -f CMakeFiles/InverseKinematics.dir/build.make CMakeFiles/InverseKinematics.dir/InverseKinematics.cpp.i
+.PHONY : InverseKinematics.cpp.i
 
-ForwardKinematics.s: ForwardKinematics.cpp.s
+InverseKinematics.s: InverseKinematics.cpp.s
 
-.PHONY : ForwardKinematics.s
+.PHONY : InverseKinematics.s
 
 # target to generate assembly for a file
-ForwardKinematics.cpp.s:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.s
-.PHONY : ForwardKinematics.cpp.s
+InverseKinematics.cpp.s:
+	$(MAKE) -f CMakeFiles/InverseKinematics.dir/build.make CMakeFiles/InverseKinematics.dir/InverseKinematics.cpp.s
+.PHONY : InverseKinematics.cpp.s
 
 NeuroKinematics/NeuroKinematics.o: NeuroKinematics/NeuroKinematics.cpp.o
 
@@ -196,13 +196,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... NeuroKinematics"
-	@echo "... rebuild_cache"
-	@echo "... ForwardKinematics"
-	@echo "... ForwardKinematics.o"
-	@echo "... ForwardKinematics.i"
-	@echo "... ForwardKinematics.s"
+	@echo "... InverseKinematics"
+	@echo "... InverseKinematics.o"
+	@echo "... InverseKinematics.i"
+	@echo "... InverseKinematics.s"
 	@echo "... NeuroKinematics/NeuroKinematics.o"
 	@echo "... NeuroKinematics/NeuroKinematics.i"
 	@echo "... NeuroKinematics/NeuroKinematics.s"
