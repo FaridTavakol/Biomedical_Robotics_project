@@ -102,39 +102,39 @@ clean: CMakeFiles/NeuroKinematics.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/InverseKinematics.dir
+# Target rules for target CMakeFiles/ForwardKinematics.dir
 
 # All Build rule for target.
-CMakeFiles/InverseKinematics.dir/all: CMakeFiles/NeuroKinematics.dir/all
-	$(MAKE) -f CMakeFiles/InverseKinematics.dir/build.make CMakeFiles/InverseKinematics.dir/depend
-	$(MAKE) -f CMakeFiles/InverseKinematics.dir/build.make CMakeFiles/InverseKinematics.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" --progress-num=1,2 "Built target InverseKinematics"
-.PHONY : CMakeFiles/InverseKinematics.dir/all
+CMakeFiles/ForwardKinematics.dir/all: CMakeFiles/NeuroKinematics.dir/all
+	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/depend
+	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" --progress-num=1,2 "Built target ForwardKinematics"
+.PHONY : CMakeFiles/ForwardKinematics.dir/all
 
 # Include target in all.
-all: CMakeFiles/InverseKinematics.dir/all
+all: CMakeFiles/ForwardKinematics.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/InverseKinematics.dir/rule: cmake_check_build_system
+CMakeFiles/ForwardKinematics.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/InverseKinematics.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ForwardKinematics.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" 0
-.PHONY : CMakeFiles/InverseKinematics.dir/rule
+.PHONY : CMakeFiles/ForwardKinematics.dir/rule
 
 # Convenience name for target.
-InverseKinematics: CMakeFiles/InverseKinematics.dir/rule
+ForwardKinematics: CMakeFiles/ForwardKinematics.dir/rule
 
-.PHONY : InverseKinematics
-
-# clean rule for target.
-CMakeFiles/InverseKinematics.dir/clean:
-	$(MAKE) -f CMakeFiles/InverseKinematics.dir/build.make CMakeFiles/InverseKinematics.dir/clean
-.PHONY : CMakeFiles/InverseKinematics.dir/clean
+.PHONY : ForwardKinematics
 
 # clean rule for target.
-clean: CMakeFiles/InverseKinematics.dir/clean
+CMakeFiles/ForwardKinematics.dir/clean:
+	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/clean
+.PHONY : CMakeFiles/ForwardKinematics.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ForwardKinematics.dir/clean
 
 .PHONY : clean
 

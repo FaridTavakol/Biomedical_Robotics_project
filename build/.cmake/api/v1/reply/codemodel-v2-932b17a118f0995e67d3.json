@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "Inverse",
+					"name" : "Kinematics",
 					"targetIndexes" : 
 					[
 						0,
@@ -39,15 +39,15 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "InverseKinematics::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-InverseKinematics-Debug-11dfcd0ae19039c6d542.json",
-					"name" : "InverseKinematics",
+					"id" : "ForwardKinematics::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ForwardKinematics-Debug-05c4f5569ccb8bca55c9.json",
+					"name" : "ForwardKinematics",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "NeuroKinematics::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-NeuroKinematics-Debug-82a928c78eab8a9412a3.json",
+					"jsonFile" : "target-NeuroKinematics-Debug-447b7ccbd38f3ae0c9d6.json",
 					"name" : "NeuroKinematics",
 					"projectIndex" : 0
 				}
