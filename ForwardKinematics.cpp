@@ -179,7 +179,7 @@ int main()
 
       if (abs(AxialHeadTranslation - AxialFeetTranslation) == Diff - 1)
       {
-        for (Rx = 0; Rx <= -90; --Rx)
+        for (Rx = 0; Rx >= -90; --Rx)
         {
           PitchRotation = Rx;
           FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
