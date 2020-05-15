@@ -1,2 +1,4 @@
 *.jpg
 test.xyz
+*.obj
+*.ply

@@ -40,7 +40,7 @@ Probe probe_init = {
 // Lateral Translation range : -49.47 - 0.00
 // Axial Head Translation range : -145.01 - 0.00
 // Axial Feet Translation range : -70.00 - 75.01 -> Experimental range from -7 to 233 inclusive
-double i{}, j{}, k{}; //counter initialization
+double i{}, j{}, k{}, l{}; //counter initialization
 
 int nan_checker_row{};
 int nan_checker_col{};
@@ -122,64 +122,16 @@ int main()
   {
     AxialFeetTranslation = i;
     AxialHeadTranslation = j;
-    for (k = 0; k <= 37.5; k += 0.5)
+    for (k = 0; k <= 37.5; k += 1.5)
     {
       LateralTranslation = k;
-
-      for (Rx = 0; Rx >= -90; --Rx)
+      if (k == 37.5)
       {
-        YawRotation = Rx * pi / 180;
-        FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-                                       LateralTranslation, ProbeInsertion,
-                                       ProbeRotation, PitchRotation, YawRotation);
-        nan_ckecker(FK);
-        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
-      }
-      YawRotation = 0;
-    }
-  }
-
-  AxialFeetTranslation = 0;
-  AxialHeadTranslation = 0;
-
-  i = 0;
-  j = -1;
-  k = 0;
-  // Loop for creating the feet face
-  for (j = -1; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); --j)
-  {
-    AxialHeadTranslation = j;
-    for (k = 0; k <= 37.5; k += 0.5)
-    {
-      LateralTranslation = k;
-      FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-                                     LateralTranslation, ProbeInsertion,
-                                     ProbeRotation, PitchRotation, YawRotation);
-      nan_ckecker(FK);
-      myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
-    }
-  }
-
-  // Loop for creating the Head face
-  // j = 200 i = 200 i++ 71 = 271 ;
-  AxialHeadTranslation = 86;
-  AxialFeetTranslation = 86;
-  i = 86;
-  j = 86;
-  k = 0;
-  for (i = 87; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); ++i)
-  {
-    AxialFeetTranslation = i;
-
-    for (k = 0; k <= 37.5; k += 0.5)
-    {
-      LateralTranslation = k;
-
-      if (abs(AxialHeadTranslation - AxialFeetTranslation) == Diff - 1)
-      {
-        for (Rx = 0; Rx >= -90; --Rx)
+        for (Ry = 0; Ry <= 30; Ry += 1.5)
         {
-          YawRotation = Rx * pi / 180;
+          YawRotation = Rx_max;
+          PitchRotation = Ry * pi / 180;
+          ;
           FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                          LateralTranslation, ProbeInsertion,
                                          ProbeRotation, PitchRotation, YawRotation);
@@ -189,12 +141,201 @@ int main()
       }
       else
       {
+        for (Ry = 0; Ry >= -37; --Ry)
+        {
+          YawRotation = Rx_max;
+          PitchRotation = Ry * pi / 180;
+          FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                         LateralTranslation, ProbeInsertion,
+                                         ProbeRotation, PitchRotation, YawRotation);
+          nan_ckecker(FK);
+          myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+        }
+      }
+    }
+  }
+
+  YawRotation = 0;
+  PitchRotation = 0;
+  AxialFeetTranslation = 0;
+  AxialHeadTranslation = 0;
+
+  i = 0;
+  j = -1;
+  k = 0;
+  // Loop for creating the feet face
+  for (j = -1; abs(AxialHeadTranslation - AxialFeetTranslation) < Diff; --j)
+  {
+    AxialHeadTranslation = j;
+
+    for (k = 0; k <= 37.5; k += 1.5)
+    {
+      LateralTranslation = k;
+      // only for the first lvl
+      if (j == -1) //lvl one    && -37.5
+      {
+        if (k == 0) // lvl one face side
+        {
+          for (i = 0; i >= -90; i -= 3) // lvl one face side Yaw lowering
+          {
+            YawRotation = i * pi / 180;
+            for (l = 0; l >= -37.5; l -= 1.5) // lvl one face side yaw lowered pitch lowering
+            {
+              PitchRotation = l * pi / 180;
+              FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                             LateralTranslation, ProbeInsertion,
+                                             ProbeRotation, PitchRotation, YawRotation);
+              nan_ckecker(FK);
+              myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+            }
+          }
+        }
+
+        else if (k == 37.5) // lvl one bore side
+        {
+          for (i = 0; i >= -90; i -= 3) // lvl one bore side Yaw lowering
+          {
+            YawRotation = i * pi / 180;
+            for (l = 0; l <= 30; l += 3) // lvl one face side yaw lowered pitch increasing
+            {
+              PitchRotation = l * pi / 180;
+              FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                             LateralTranslation, ProbeInsertion,
+                                             ProbeRotation, PitchRotation, YawRotation);
+              nan_ckecker(FK);
+              myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+            }
+          }
+        }
+        else // lvl one When not at the begining nor at the end (face/bore)
+        {
+          PitchRotation = 0;
+          for (i = 0; i >= -90; i -= 3) // lvl one bore side Yaw lowering
+          {
+            YawRotation = i * pi / 180;
+            FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                           LateralTranslation, ProbeInsertion,
+                                           ProbeRotation, PitchRotation, YawRotation);
+            nan_ckecker(FK);
+            myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+          }
+        }
+      }
+      //end of first lvl
+
+      else
+      {
+        if (k == 0) // any lvl face side
+        {
+          for (i = 0; i >= -37.5; i -= 1.5)
+          {
+            PitchRotation = i * pi / 180;
+            YawRotation = 0;
+            FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                           LateralTranslation, ProbeInsertion,
+                                           ProbeRotation, PitchRotation, YawRotation);
+            nan_ckecker(FK);
+            myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+          }
+        }
+        else if (k == 37.5) // any lvl bore side
+        {
+          for (i = 0; i <= 30; i += 1.5)
+          {
+            PitchRotation = i * pi / 180;
+            YawRotation = 0;
+            FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                           LateralTranslation, ProbeInsertion,
+                                           ProbeRotation, PitchRotation, YawRotation);
+            nan_ckecker(FK);
+            myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+          }
+        }
+
+        else // any lvl bore side in between
+        {
+          PitchRotation = 0;
+          YawRotation = 0;
+          FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                         LateralTranslation, ProbeInsertion,
+                                         ProbeRotation, PitchRotation, YawRotation);
+          nan_ckecker(FK);
+          myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+        }
+      }
+    }
+  }
+
+  // Loop for creating the Head face
+  // j = 200 i = 200 i++ 71 = 271 ;
+  PitchRotation = 0;
+  YawRotation = 0;
+
+  AxialHeadTranslation = 86;
+  AxialFeetTranslation = 86;
+  i = 86;
+  j = 86;
+  k = 0;
+  for (i = 87; abs(AxialHeadTranslation - AxialFeetTranslation) <= Diff; ++i)
+  {
+    AxialFeetTranslation = i;
+
+    for (k = 0; k <= 37.5; k += 1.5)
+    {
+      LateralTranslation = k;
+
+      if (abs(AxialHeadTranslation - AxialFeetTranslation) == Diff) // highest lvl
+      {
+        for (Rx = 0; Rx >= -90; --Rx)
+        {
+          PitchRotation = 0;
+          YawRotation = Rx * pi / 180;
+          FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                         LateralTranslation, ProbeInsertion,
+                                         ProbeRotation, PitchRotation, YawRotation);
+          nan_ckecker(FK);
+          myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+        }
+      }
+      else // all lvls before highest lvl
+      {
         YawRotation = Rx_max;
-        FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-                                       LateralTranslation, ProbeInsertion,
-                                       ProbeRotation, PitchRotation, YawRotation);
-        nan_ckecker(FK);
-        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+
+        if (k == 0) // any lvl face side
+        {
+          for (j = 0; j >= -37.5; j -= 1.5)
+          {
+            PitchRotation = j * pi / 180;
+            FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                           LateralTranslation, ProbeInsertion,
+                                           ProbeRotation, PitchRotation, YawRotation);
+            nan_ckecker(FK);
+            myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+          }
+        }
+        else if (k == 37.5) // any lvl bore side
+        {
+          for (j = 0; j <= 30; j += 3)
+          {
+
+            PitchRotation = j * pi / 180;
+
+            FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                           LateralTranslation, ProbeInsertion,
+                                           ProbeRotation, PitchRotation, YawRotation);
+            nan_ckecker(FK);
+            myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+          }
+        }
+        else // any lvl between face and bore side
+        {
+          PitchRotation = 0;
+          FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                         LateralTranslation, ProbeInsertion,
+                                         ProbeRotation, PitchRotation, YawRotation);
+          nan_ckecker(FK);
+          myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+        }
       }
     }
   }
