@@ -3,6 +3,10 @@
 #include <string>
 #include <math.h> /* isnan, sqrt */
 #include <cstdlib>
+#include <fstream>
+using std::endl;
+using std::ofstream;
+
 // #include "matplotlibcpp.h"
 // namespace plt = matplotlibcpp;
 
@@ -29,62 +33,73 @@ Probe probe_init = {
     _treatmentToTip,
     _robotToEntry,
     _robotToTreatmentAtHome};
+// Yaw rotation range : -1.54 - +0.01
+// Probe Rotation range : -6.28 - +6.28
+// Pitch Rotation range : -0.46 - 0.65
+// Probe Insertion range : 0.00 - 34.93
+// Lateral Translation range : -49.47 - 0.00
+// Axial Head Translation range : -145.01 - 0.00
+// Axial Feet Translation range : -70.00 - 75.01 -> Experimental range from -7 to 233 inclusive
+double i{}, j{}, k{}; //counter initialization
 
-// std::cout << Forward._lengthOfAxialTrapezoidSideLink << std::endl;
-// std::cout << Forward._widthTrapezoidTop << std::endl;
-// std::cout << Forward._initialAxialSeperation << std::endl;
-// std::cout << Forward._xInitialRCM << std::endl;
-// std::cout << Forward._yInitialRCM << std::endl;
-// std::cout << Forward._zInitialRCM << std::endl;
-// std::cout << Forward._robotToRCMOffset << std::endl;
-// std::cout << Forward._probe->_treatmentToTip << std::endl;
-// std::cout << "the code built successfully" << std::endl;
-// std::cout << ProbeRotation << std::endl;
-// std::cout << "The probe cannula to treatment is:" << probe_init._cannulaToTreatment << std::endl;
-
-int main()
+int nan_checker_row{};
+int nan_checker_col{};
+// Function to search for nan values in the FK output
+int nan_ckecker(Neuro_FK_outputs FK)
 {
-  // Probe *probe1{&probe_init}; // Creating a pointer Probe1 of type Probe that points to the address of probe_init
-  NeuroKinematics Forward(&probe_init);
-  // Yaw rotation range : -1.54 - +0.01
-  // Probe Rotation range : -6.28 - +6.28
-  // Pitch Rotation range : -0.46 - 0.65
-  // Probe Insertion range : 0.00 - 34.93
-  // Lateral Translation range : -49.47 - 0.00
-  // Axial Head Translation range : -145.01 - 0.00
-  // Axial Feet Translation range : -70.00 - 75.01 -> Experimental range from -7 to 233 inclusive
-
-  Neuro_FK_outputs FK{}; // object for the forward kinematics output
-
-  // loop for visualizing the bottom
-  double i{}, j{}, k{}, l{}; // initializing the counters
-
-  for (i = 0, j = 0; i < 87; ++i, ++j) //75
+  for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
   {
-    AxialFeetTranslation = i;
-    AxialHeadTranslation = j;
-    for (k = 0; k <= 37.5; k += 0.5)
+    for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
     {
-      LateralTranslation = k;
-      FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-                                     LateralTranslation, ProbeInsertion,
-                                     ProbeRotation, PitchRotation, YawRotation);
-      if (isnan(FK.zFrameToTreatment(1, 3)))
+
+      if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
       {
-        std::cout << "Y is out of range!\n";
+        std::cout << "row :" << nan_checker_row << "cloumn :"
+                  << "is nan!\n";
+        return 1;
         break;
-      }
-      if (i == 0 | i == 86)
-      {
-        std::cout << "\ni is :" << i << " ,";
-        std::cout << "j is :" << j << " ,";
-        std::cout << "k is :" << k << std::endl;
-        std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-        std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-        std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
       }
     }
   }
+  return 0;
+};
+
+int main()
+{
+  Eigen::Vector4d entryPointScanner{};
+  std::cout << "Enter Desired X value :";
+  std::cin >> entryPointScanner(0);
+  std::cout << "\nEnter Desired Y value :";
+  std::cin >> entryPointScanner(1);
+  std::cout << "\nEnter Desired Z value :";
+  std::cin >> entryPointScanner(2);
+  entryPointScanner(3) = 1;
+
+  // An arbitrary Registration matrix is selected. This matrix is dependant of the Imager
+  Eigen::Matrix4d _registration;
+  _registration = (Eigen::Matrix4d() << 1, 0, 0, 0,
+                   0, 1, 0, 0,
+                   0, 0, 1, 0,
+                   0, 0, 0, 1)
+                      .finished();
+  Eigen::Vector4d zFrameToEntry = _registration.inverse() * entryPointScanner;
+  //----------------------------------FK computation --------------------------------------------------------
+  NeuroKinematics Forward(&probe_init);
+  Neuro_FK_outputs FK{};
+
+  // Initializing the counters for nan output
+  // Min allowed seperation 75mm
+  // Max allowed seperation  146mm
+  const double Diff{71}; // Is the max allowed movement while one block is stationary 146-75 = 71 mm
+
+  double pi{3.141};
+  double Ry{};                    // Initializing the PitchRotation counter
+  double RyF_max{-37 * pi / 180}; // in paper is 37.2
+  double RyB_max{+30 * pi / 180}; // in paper is  30.6
+  double Rx{};                    // Initializing the YawRotation counter
+  double Rx_max{-90 * pi / 180};
+
+  ofstream myout("test.xyz");
 
   // Loop for visualizing the top
   for (i = 0, j = -71; i < 157; ++i, ++j) // 201 to 157 it should be 201 based on the paper
@@ -97,30 +112,36 @@ int main()
       FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                      LateralTranslation, ProbeInsertion,
                                      ProbeRotation, PitchRotation, YawRotation);
-      if (isnan(FK.zFrameToTreatment(1, 3)))
-      {
-        std::cout << "Y is out of range!\n";
-        break;
-      }
-      if (i == 0 | i == 156)
-      {
-        std::cout << "\ni is :" << i << " ,";
-        std::cout << "j is :" << j << " ,";
-        std::cout << "k is :" << k << std::endl;
-        std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-        std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-        std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
-      }
+      nan_ckecker(FK);
+      myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
     }
   }
-  // Min allowed seperation 75mm
-  // Max allowed seperation  146mm
-  const double Diff{71}; // Is the max allowed movement while one block is stationary 146-75 = 71 mm
+
+  // loop for visualizing the bottom
+  for (i = 0, j = 0; i < 87; ++i, ++j) //75
+  {
+    AxialFeetTranslation = i;
+    AxialHeadTranslation = j;
+    for (k = 0; k <= 37.5; k += 0.5)
+    {
+      LateralTranslation = k;
+
+      for (Rx = 0; Rx >= -90; --Rx)
+      {
+        YawRotation = Rx * pi / 180;
+        FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                       LateralTranslation, ProbeInsertion,
+                                       ProbeRotation, PitchRotation, YawRotation);
+        nan_ckecker(FK);
+        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+      }
+      YawRotation = 0;
+    }
+  }
+
   AxialFeetTranslation = 0;
   AxialHeadTranslation = 0;
 
-  int nan_checker_row{};
-  int nan_checker_col{};
   i = 0;
   j = -1;
   k = 0;
@@ -134,41 +155,18 @@ int main()
       FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                      LateralTranslation, ProbeInsertion,
                                      ProbeRotation, PitchRotation, YawRotation);
-      for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-      {
-        for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-        {
-
-          if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-          {
-            std::cout << "row :" << nan_checker_row << "cloumn :"
-                      << "is nan!\n";
-            break;
-          }
-        }
-      }
+      nan_ckecker(FK);
+      myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
     }
-    std::cout << "\ni is :" << i << " ,";
-    std::cout << "j is :" << j << " ,";
-    std::cout << "k is :" << k << std::endl;
-    std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-    std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-    std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
-    std::cout << "Head Position :" << AxialHeadTranslation << std::endl;
   }
 
   // Loop for creating the Head face
   // j = 200 i = 200 i++ 71 = 271 ;
   AxialHeadTranslation = 86;
   AxialFeetTranslation = 86;
-  nan_checker_row = 0;
-  nan_checker_col = 0;
   i = 86;
   j = 86;
   k = 0;
-  double Rx{};
-  double Rx_max{-90};
-
   for (i = 87; Diff > abs(AxialHeadTranslation - AxialFeetTranslation); ++i)
   {
     AxialFeetTranslation = i;
@@ -181,69 +179,38 @@ int main()
       {
         for (Rx = 0; Rx >= -90; --Rx)
         {
-          PitchRotation = Rx;
+          YawRotation = Rx * pi / 180;
           FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                          LateralTranslation, ProbeInsertion,
                                          ProbeRotation, PitchRotation, YawRotation);
-          for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-          {
-            for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-            {
-
-              if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-              {
-                std::cout << "row :" << nan_checker_row << "cloumn :"
-                          << "is nan!\n";
-                break;
-              }
-            }
-          }
-          std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-          std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-          std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+          nan_ckecker(FK);
+          myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
         }
       }
       else
       {
-        PitchRotation = Rx_max;
+        YawRotation = Rx_max;
         FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                        LateralTranslation, ProbeInsertion,
                                        ProbeRotation, PitchRotation, YawRotation);
-        for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-        {
-          for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-          {
-
-            if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-            {
-              std::cout << "row :" << nan_checker_row << "cloumn :"
-                        << "is nan!\n";
-              break;
-            }
-          }
-        }
-        std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-        std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-        std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
-        std::cout << "Feet Position :" << AxialFeetTranslation << std::endl;
+        nan_ckecker(FK);
+        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
       }
     }
   }
+  YawRotation = 0; //resetting the Yaw value to 0
 
   //loop for creating the sides
   AxialFeetTranslation = 0;
   AxialHeadTranslation = 0;
   LateralTranslation = 0;
-  nan_checker_row = 0;
-  nan_checker_col = 0;
   i = 0;
   j = -1;
   k = 0;
   double ii{};
   // double jj{};
-  double min_travel{86};
-  double max_travel{200};
-  // double Old_AxialHeadTranslation{};
+  double min_travel{86};  // The max that the robot can move in z direction when at lowest heigth ( at each hight min level is changed)
+  double max_travel{156}; // The max that the robot can move in z direction when at highest heigth
   for (j = -1; Diff > abs(j); --j)
   {
     AxialHeadTranslation = j;
@@ -254,39 +221,112 @@ int main()
       ++AxialHeadTranslation;
       ++AxialFeetTranslation;
 
-      for (k = 0; k <= 37.5; k += 37.5)
+      for (k = 0; k <= 37.5; k += 37.5) // Chooses sides for generation of the PC
       {
         LateralTranslation = k;
-        FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
-                                       LateralTranslation, ProbeInsertion,
-                                       ProbeRotation, PitchRotation, YawRotation);
-        for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-        {
-          for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-          {
 
-            if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
+        if (min_travel == max_travel && ii == min_travel) // when head is at the highest and to the last point towards feet
+        {
+          for (Rx = 0; Rx >= -90; --Rx)
+          {
+            YawRotation = Rx * pi / 180;
+
+            if (k == 0) // towards face and top of workspace
             {
-              std::cout << "row :" << nan_checker_row << "cloumn :"
-                        << "is nan!\n";
-              break;
+              for (Ry = 0; Ry >= -37; --Ry)
+              {
+                PitchRotation = Ry * pi / 180;
+                FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                               LateralTranslation, ProbeInsertion,
+                                               ProbeRotation, PitchRotation, YawRotation);
+                nan_ckecker(FK);
+                myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+              }
+            }
+            else if (k == 37.5) // towards bore and top of workspace
+            {
+              for (Ry = 0; Ry <= 30; ++Ry)
+              {
+                PitchRotation = Ry * pi / 180;
+                FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                               LateralTranslation, ProbeInsertion,
+                                               ProbeRotation, PitchRotation, YawRotation);
+                nan_ckecker(FK);
+                myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+              }
             }
           }
         }
+        // Other cases other than the above
+        else
+        {
+          if (k == 0 && abs(j) == Diff - 1) // towards face and top of workspace
+          {
+            YawRotation = 0; //Rx = 0
+            for (Ry = 0; Ry >= -37; --Ry)
+            {
+              PitchRotation = Ry * pi / 180;
+              FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                             LateralTranslation, ProbeInsertion,
+                                             ProbeRotation, PitchRotation, YawRotation);
+              nan_ckecker(FK);
+              myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+            }
+          }
+          else if (k == 37.5 && abs(j) == Diff - 1) // towards bore and top of workspace
+          {
+            YawRotation = 0; //Rx = 0
+            for (Ry = 0; Ry <= 30; ++Ry)
+            {
+              PitchRotation = Ry * pi / 180;
+              FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                             LateralTranslation, ProbeInsertion,
+                                             ProbeRotation, PitchRotation, YawRotation);
+              nan_ckecker(FK);
+              myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+            }
+          }
 
-        std::cout << "\ni is :" << i << " ,";
-        std::cout << "j is :" << j << " ,";
-        std::cout << "k is :" << k << std::endl;
-        std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-        std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-        std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
-        std::cout << "Head Position :" << AxialHeadTranslation << std::endl;
+          else if (k == 0 && abs(j) != Diff - 1) // towards face from bottom to a point before max heigth)
+          {
+            PitchRotation = RyF_max;
+            for (Rx = 0; Rx >= -90; --Rx)
+            {
+              YawRotation = Rx * pi / 180;
+              FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                             LateralTranslation, ProbeInsertion,
+                                             ProbeRotation, PitchRotation, YawRotation);
+              nan_ckecker(FK);
+              myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+            }
+          }
+          else if (k == 37.5 && abs(j) != Diff - 1) // towards bore from bottom to a point before max heigth
+          {
+            PitchRotation = RyB_max;
+            for (Rx = 0; Rx >= -90; --Rx)
+            {
+              YawRotation = Rx * pi / 180;
+              FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
+                                             LateralTranslation, ProbeInsertion,
+                                             ProbeRotation, PitchRotation, YawRotation);
+              nan_ckecker(FK);
+              myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+            }
+          }
+        }
+        YawRotation = 0;
+        PitchRotation = 0;
       }
+      LateralTranslation = 0;
+      // if (ii > 150)
+      //   std::cout << "valuse of ii " << ii << std::endl;
+      // if (min_travel == 156)
+      //   std::cout << "valuse :" << ii << std::endl;
     }
     AxialHeadTranslation = 0;
     AxialFeetTranslation = 0;
-    LateralTranslation = 0;
   }
+
   // =================================Desired point checker =============================================================================
   // AxialFeetTranslation = 13.5909;
   // AxialHeadTranslation = 20.5828;
@@ -299,6 +339,7 @@ int main()
   // std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
   // std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
   // std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+  myout.close();
 
   return 0;
 }

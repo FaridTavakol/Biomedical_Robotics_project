@@ -40,6 +40,29 @@ Probe probe_init = {
 // Lateral Translation range : -49.47 - 0.00
 // Axial Head Translation range : -145.01 - 0.00
 // Axial Feet Translation range : -70.00 - 75.01 -> Experimental range from -7 to 233 inclusive
+double i{}, j{}, k{}; //counter initialization
+
+int nan_checker_row{};
+int nan_checker_col{};
+// Function to search for nan values in the FK output
+int nan_ckecker(Neuro_FK_outputs FK)
+{
+    for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
+    {
+        for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
+        {
+
+            if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
+            {
+                std::cout << "row :" << nan_checker_row << "cloumn :"
+                          << "is nan!\n";
+                return 1;
+                break;
+            }
+        }
+    }
+    return 0;
+};
 
 int main()
 {
@@ -68,8 +91,7 @@ int main()
     // Min allowed seperation 75mm
     // Max allowed seperation  146mm
     const double Diff{71}; // Is the max allowed movement while one block is stationary 146-75 = 71 mm
-    int nan_checker_row{};
-    int nan_checker_col{};
+
     double pi{3.141};
     double Ry{};                    // Initializing the PitchRotation counter
     double RyF_max{-37 * pi / 180}; // in paper is 37.2
@@ -80,7 +102,6 @@ int main()
     ofstream myout("test.xyz");
 
     // loop for visualizing the bottom
-    double i{}, j{}, k{};
     for (i = 0, j = 0; i < 87; ++i, ++j) //75
     {
         AxialFeetTranslation = i;
@@ -95,19 +116,7 @@ int main()
                 FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                                LateralTranslation, ProbeInsertion,
                                                ProbeRotation, PitchRotation, YawRotation);
-                for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-                {
-                    for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                    {
-
-                        if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                        {
-                            std::cout << "row :" << nan_checker_row << "cloumn :"
-                                      << "is nan!\n";
-                            break;
-                        }
-                    }
-                }
+                nan_ckecker(FK);
                 myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
             }
             YawRotation = 0;
@@ -125,20 +134,7 @@ int main()
             FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                            LateralTranslation, ProbeInsertion,
                                            ProbeRotation, PitchRotation, YawRotation);
-            for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-            {
-                for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                {
-
-                    if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                    {
-                        std::cout << "row :" << nan_checker_row << "cloumn :" << nan_checker_col
-                                  << "is nan!\n";
-                        break;
-                    }
-                }
-            }
-
+            nan_ckecker(FK);
             myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
 
             // }
@@ -161,20 +157,7 @@ int main()
             FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                            LateralTranslation, ProbeInsertion,
                                            ProbeRotation, PitchRotation, YawRotation);
-            for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-            {
-                for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                {
-
-                    if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                    {
-                        std::cout << "row :" << nan_checker_row << "cloumn :" << nan_checker_col
-                                  << "is nan!\n";
-                        break;
-                    }
-                }
-            }
-
+            nan_ckecker(FK);
             myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
         }
     }
@@ -183,8 +166,6 @@ int main()
     // j = 200 i = 200 i++ 71 = 271 ;
     AxialHeadTranslation = 86;
     AxialFeetTranslation = 86;
-    nan_checker_row = 0;
-    nan_checker_col = 0;
     i = 86;
     j = 86;
     k = 0;
@@ -204,22 +185,7 @@ int main()
                     FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                                    LateralTranslation, ProbeInsertion,
                                                    ProbeRotation, PitchRotation, YawRotation);
-                    for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-                    {
-                        for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                        {
-
-                            if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                            {
-                                std::cout << "row :" << nan_checker_row << "cloumn :"
-                                          << "is nan!\n";
-                                break;
-                            }
-                        }
-                    }
-                    // std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-                    // std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-                    // std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
+                    nan_ckecker(FK);
                     myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
                 }
             }
@@ -229,23 +195,7 @@ int main()
                 FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                                LateralTranslation, ProbeInsertion,
                                                ProbeRotation, PitchRotation, YawRotation);
-                for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-                {
-                    for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                    {
-
-                        if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                        {
-                            std::cout << "row :" << nan_checker_row << "cloumn :"
-                                      << "is nan!\n";
-                            break;
-                        }
-                    }
-                }
-                // std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
-                // std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
-                // std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
-                // std::cout << "Feet Position :" << AxialFeetTranslation << std::endl;
+                nan_ckecker(FK);
                 myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
             }
         }
@@ -256,8 +206,6 @@ int main()
     AxialFeetTranslation = 0;
     AxialHeadTranslation = 0;
     LateralTranslation = 0;
-    nan_checker_row = 0;
-    nan_checker_col = 0;
     i = 0;
     j = -1;
     k = 0;
@@ -292,19 +240,7 @@ int main()
                             FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                                            LateralTranslation, ProbeInsertion,
                                                            ProbeRotation, PitchRotation, YawRotation);
-                            for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-                            {
-                                for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                                {
-
-                                    if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                                    {
-                                        std::cout << "row :" << nan_checker_row << "cloumn :"
-                                                  << "is nan!\n";
-                                        break;
-                                    }
-                                }
-                            }
+                            nan_ckecker(FK);
                             myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
                         }
                     }
@@ -314,19 +250,7 @@ int main()
                         FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                                        LateralTranslation, ProbeInsertion,
                                                        ProbeRotation, PitchRotation, YawRotation);
-                        for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-                        {
-                            for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                            {
-
-                                if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                                {
-                                    std::cout << "row :" << nan_checker_row << "cloumn :"
-                                              << "is nan!\n";
-                                    break;
-                                }
-                            }
-                        }
+                        nan_ckecker(FK);
                         myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
                     }
                     else if (k == 37.5 && abs(j) == Diff - 1) // towards bore and top of workspace
@@ -337,19 +261,7 @@ int main()
                             FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                                            LateralTranslation, ProbeInsertion,
                                                            ProbeRotation, PitchRotation, YawRotation);
-                            for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-                            {
-                                for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                                {
-
-                                    if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                                    {
-                                        std::cout << "row :" << nan_checker_row << "cloumn :"
-                                                  << "is nan!\n";
-                                        break;
-                                    }
-                                }
-                            }
+                            nan_ckecker(FK);
                             myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
                         }
                     }
@@ -359,19 +271,7 @@ int main()
                         FK = Forward.ForwardKinematics(AxialHeadTranslation, AxialFeetTranslation,
                                                        LateralTranslation, ProbeInsertion,
                                                        ProbeRotation, PitchRotation, YawRotation);
-                        for (nan_checker_row = 0; nan_checker_row < 4; ++nan_checker_row) // Loop for checking NaN
-                        {
-                            for (nan_checker_col = 0; nan_checker_col < 4; ++nan_checker_col)
-                            {
-
-                                if (isnan(FK.zFrameToTreatment(nan_checker_row, nan_checker_col)))
-                                {
-                                    std::cout << "row :" << nan_checker_row << "cloumn :"
-                                              << "is nan!\n";
-                                    break;
-                                }
-                            }
-                        }
+                        nan_ckecker(FK);
                         myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
                     }
                 }

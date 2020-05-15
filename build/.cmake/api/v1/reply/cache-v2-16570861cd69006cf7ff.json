@@ -1098,6 +1098,30 @@
 			"value" : "[/usr/bin/python3.6][/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6m.so][/usr/include/python3.6m][cfound components:  Interpreter Development ][v3.6.9()]"
 		},
 		{
+			"name" : "IK_Solver_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build"
+		},
+		{
+			"name" : "IK_Solver_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics"
+		},
+		{
 			"name" : "Inverse_BINARY_DIR",
 			"properties" : 
 			[

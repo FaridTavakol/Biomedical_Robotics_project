@@ -196,6 +196,12 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
+IK_Solver_BINARY_DIR:STATIC=/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build
+
+//Value Computed by CMake
+IK_Solver_SOURCE_DIR:STATIC=/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics
+
+//Value Computed by CMake
 Inverse_BINARY_DIR:STATIC=/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build
 
 //Value Computed by CMake

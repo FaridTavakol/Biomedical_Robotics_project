@@ -1,0 +1,1 @@
+/usr/bin/clang++-6.0  -g  -rdynamic CMakeFiles/IK_Solver.dir/IK_Solver.cpp.o  -o IK_Solver libNeuroKinematics.a 

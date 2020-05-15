@@ -42,17 +42,17 @@ target_link_libraries(ForwardKinematics
 #   NeuroKinematics
 # )
 # ==========================IK_Solver================================
-# Inverse Kinematics
-cmake_minimum_required(VERSION 3.0.0)
+# # Inverse Kinematics
+# cmake_minimum_required(VERSION 3.0.0)
 
-add_definitions() #-DDEBUG -DVIEW_TABLE
+# add_definitions() #-DDEBUG -DVIEW_TABLE
 
-project(IK_Solver)
+# project(IK_Solver)
 
-include_directories(NeuroKinematics NeuroKinematics/)
+# include_directories(NeuroKinematics NeuroKinematics/)
 
-add_library(NeuroKinematics NeuroKinematics/NeuroKinematics.cpp)
-add_executable(IK_Solver IK_Solver.cpp)
-target_link_libraries(IK_Solver
-  NeuroKinematics
-)
+# add_library(NeuroKinematics NeuroKinematics/NeuroKinematics.cpp)
+# add_executable(IK_Solver IK_Solver.cpp)
+# target_link_libraries(IK_Solver
+#   NeuroKinematics
+# )

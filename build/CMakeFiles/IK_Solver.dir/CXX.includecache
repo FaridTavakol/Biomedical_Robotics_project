@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/ForwardKinematics.cpp
+/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/IK_Solver.cpp
 NeuroKinematics/NeuroKinematics.hpp
 /home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/NeuroKinematics/NeuroKinematics.hpp
 iostream
