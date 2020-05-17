@@ -37,6 +37,12 @@ struct Neuro_IK_outputs
   double YawRotation;
   double PitchRotation;
 };
+struct IK_Solver_outputs
+{
+  double AxialFeetTranslation;
+  double AxialHeadTranslation;
+  double LateralTranslation;
+};
 
 struct Probe
 {
@@ -88,6 +94,8 @@ public:
                                      double ProbeRotation, double PitchRotation, double YawRotation);
 
   Neuro_IK_outputs InverseKinematics(Eigen::Vector4d entryPointzFrame, Eigen::Vector4d targetPointzFrame);
+  // IK Method for calculation of the cartesian base based on a given Entry point
+  IK_Solver_outputs IK_solver(Eigen::Vector4d entryPointzFrame);
 };
 
 #endif /* NEUROKINEMATICS_HPP_ */

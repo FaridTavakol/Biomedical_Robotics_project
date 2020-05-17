@@ -2,3 +2,5 @@
 test.xyz
 *.obj
 *.ply
+*.stl
+*.mlp

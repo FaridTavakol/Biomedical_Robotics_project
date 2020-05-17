@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "Kinematics",
+					"name" : "IK_Solver",
 					"targetIndexes" : 
 					[
 						0,
@@ -39,15 +39,15 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "ForwardKinematics::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ForwardKinematics-Debug-05c4f5569ccb8bca55c9.json",
-					"name" : "ForwardKinematics",
+					"id" : "IK_Solver::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-IK_Solver-Debug-3ede50f5e238b23b033f.json",
+					"name" : "IK_Solver",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "NeuroKinematics::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-NeuroKinematics-Debug-447b7ccbd38f3ae0c9d6.json",
+					"jsonFile" : "target-NeuroKinematics-Debug-45f0a9a5e02f0a37bbaa.json",
 					"name" : "NeuroKinematics",
 					"projectIndex" : 0
 				}

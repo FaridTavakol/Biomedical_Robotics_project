@@ -66,23 +66,6 @@ int nan_ckecker(Neuro_FK_outputs FK)
 
 int main()
 {
-  Eigen::Vector4d entryPointScanner{};
-  std::cout << "Enter Desired X value :";
-  std::cin >> entryPointScanner(0);
-  std::cout << "\nEnter Desired Y value :";
-  std::cin >> entryPointScanner(1);
-  std::cout << "\nEnter Desired Z value :";
-  std::cin >> entryPointScanner(2);
-  entryPointScanner(3) = 1;
-
-  // An arbitrary Registration matrix is selected. This matrix is dependant of the Imager
-  Eigen::Matrix4d _registration;
-  _registration = (Eigen::Matrix4d() << 1, 0, 0, 0,
-                   0, 1, 0, 0,
-                   0, 0, 1, 0,
-                   0, 0, 0, 1)
-                      .finished();
-  Eigen::Vector4d zFrameToEntry = _registration.inverse() * entryPointScanner;
   //----------------------------------FK computation --------------------------------------------------------
   NeuroKinematics Forward(&probe_init);
   Neuro_FK_outputs FK{};
@@ -484,3 +467,20 @@ int main()
 
   return 0;
 }
+// Eigen::Vector4d entryPointScanner{};
+// std::cout << "Enter Desired X value :";
+// std::cin >> entryPointScanner(0);
+// std::cout << "\nEnter Desired Y value :";
+// std::cin >> entryPointScanner(1);
+// std::cout << "\nEnter Desired Z value :";
+// std::cin >> entryPointScanner(2);
+// entryPointScanner(3) = 1;
+
+// // An arbitrary Registration matrix is selected. This matrix is dependant of the Imager
+// Eigen::Matrix4d _registration;
+// _registration = (Eigen::Matrix4d() << 1, 0, 0, 0,
+//                  0, 1, 0, 0,
+//                  0, 0, 1, 0,
+//                  0, 0, 0, 1)
+//                     .finished();
+// Eigen::Vector4d zFrameToEntry = _registration.inverse() * entryPointScanner;

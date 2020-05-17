@@ -102,39 +102,39 @@ clean: CMakeFiles/NeuroKinematics.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/ForwardKinematics.dir
+# Target rules for target CMakeFiles/IK_Solver.dir
 
 # All Build rule for target.
-CMakeFiles/ForwardKinematics.dir/all: CMakeFiles/NeuroKinematics.dir/all
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/depend
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" --progress-num=1,2 "Built target ForwardKinematics"
-.PHONY : CMakeFiles/ForwardKinematics.dir/all
+CMakeFiles/IK_Solver.dir/all: CMakeFiles/NeuroKinematics.dir/all
+	$(MAKE) -f CMakeFiles/IK_Solver.dir/build.make CMakeFiles/IK_Solver.dir/depend
+	$(MAKE) -f CMakeFiles/IK_Solver.dir/build.make CMakeFiles/IK_Solver.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" --progress-num=1,2 "Built target IK_Solver"
+.PHONY : CMakeFiles/IK_Solver.dir/all
 
 # Include target in all.
-all: CMakeFiles/ForwardKinematics.dir/all
+all: CMakeFiles/IK_Solver.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/ForwardKinematics.dir/rule: cmake_check_build_system
+CMakeFiles/IK_Solver.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ForwardKinematics.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/IK_Solver.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/aimlab/Documents/Courses/Biomedical Engineering/project/Neuro_code/Kinematics/build/CMakeFiles" 0
-.PHONY : CMakeFiles/ForwardKinematics.dir/rule
+.PHONY : CMakeFiles/IK_Solver.dir/rule
 
 # Convenience name for target.
-ForwardKinematics: CMakeFiles/ForwardKinematics.dir/rule
+IK_Solver: CMakeFiles/IK_Solver.dir/rule
 
-.PHONY : ForwardKinematics
-
-# clean rule for target.
-CMakeFiles/ForwardKinematics.dir/clean:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/clean
-.PHONY : CMakeFiles/ForwardKinematics.dir/clean
+.PHONY : IK_Solver
 
 # clean rule for target.
-clean: CMakeFiles/ForwardKinematics.dir/clean
+CMakeFiles/IK_Solver.dir/clean:
+	$(MAKE) -f CMakeFiles/IK_Solver.dir/build.make CMakeFiles/IK_Solver.dir/clean
+.PHONY : CMakeFiles/IK_Solver.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/IK_Solver.dir/clean
 
 .PHONY : clean
 

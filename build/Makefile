@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = "/home/aimlab/Documents/Courses/Biomedical Engineering/projec
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/lib/python3.6/dist-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/lib/python3.6/dist-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -124,44 +124,44 @@ NeuroKinematics/fast:
 .PHONY : NeuroKinematics/fast
 
 #=============================================================================
-# Target rules for targets named ForwardKinematics
+# Target rules for targets named IK_Solver
 
 # Build rule for target.
-ForwardKinematics: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ForwardKinematics
-.PHONY : ForwardKinematics
+IK_Solver: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 IK_Solver
+.PHONY : IK_Solver
 
 # fast build rule for target.
-ForwardKinematics/fast:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/build
-.PHONY : ForwardKinematics/fast
+IK_Solver/fast:
+	$(MAKE) -f CMakeFiles/IK_Solver.dir/build.make CMakeFiles/IK_Solver.dir/build
+.PHONY : IK_Solver/fast
 
-ForwardKinematics.o: ForwardKinematics.cpp.o
+IK_Solver.o: IK_Solver.cpp.o
 
-.PHONY : ForwardKinematics.o
+.PHONY : IK_Solver.o
 
 # target to build an object file
-ForwardKinematics.cpp.o:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.o
-.PHONY : ForwardKinematics.cpp.o
+IK_Solver.cpp.o:
+	$(MAKE) -f CMakeFiles/IK_Solver.dir/build.make CMakeFiles/IK_Solver.dir/IK_Solver.cpp.o
+.PHONY : IK_Solver.cpp.o
 
-ForwardKinematics.i: ForwardKinematics.cpp.i
+IK_Solver.i: IK_Solver.cpp.i
 
-.PHONY : ForwardKinematics.i
+.PHONY : IK_Solver.i
 
 # target to preprocess a source file
-ForwardKinematics.cpp.i:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.i
-.PHONY : ForwardKinematics.cpp.i
+IK_Solver.cpp.i:
+	$(MAKE) -f CMakeFiles/IK_Solver.dir/build.make CMakeFiles/IK_Solver.dir/IK_Solver.cpp.i
+.PHONY : IK_Solver.cpp.i
 
-ForwardKinematics.s: ForwardKinematics.cpp.s
+IK_Solver.s: IK_Solver.cpp.s
 
-.PHONY : ForwardKinematics.s
+.PHONY : IK_Solver.s
 
 # target to generate assembly for a file
-ForwardKinematics.cpp.s:
-	$(MAKE) -f CMakeFiles/ForwardKinematics.dir/build.make CMakeFiles/ForwardKinematics.dir/ForwardKinematics.cpp.s
-.PHONY : ForwardKinematics.cpp.s
+IK_Solver.cpp.s:
+	$(MAKE) -f CMakeFiles/IK_Solver.dir/build.make CMakeFiles/IK_Solver.dir/IK_Solver.cpp.s
+.PHONY : IK_Solver.cpp.s
 
 NeuroKinematics/NeuroKinematics.o: NeuroKinematics/NeuroKinematics.cpp.o
 
@@ -196,13 +196,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... NeuroKinematics"
-	@echo "... rebuild_cache"
-	@echo "... ForwardKinematics"
-	@echo "... ForwardKinematics.o"
-	@echo "... ForwardKinematics.i"
-	@echo "... ForwardKinematics.s"
+	@echo "... IK_Solver"
+	@echo "... IK_Solver.o"
+	@echo "... IK_Solver.i"
+	@echo "... IK_Solver.s"
 	@echo "... NeuroKinematics/NeuroKinematics.o"
 	@echo "... NeuroKinematics/NeuroKinematics.i"
 	@echo "... NeuroKinematics/NeuroKinematics.s"
