@@ -74,8 +74,7 @@ int main()
   // Min allowed seperation 75mm
   // Max allowed seperation  146mm
   const double Diff{71}; // Is the max allowed movement while one block is stationary 146-75 = 71 mm
-
-  double pi{3.141};
+  const double pi{3.141};
   double Ry{};                    // Initializing the PitchRotation counter
   double RyF_max{-37 * pi / 180}; // in paper is 37.2
   double RyB_max{+30 * pi / 180}; // in paper is  30.6

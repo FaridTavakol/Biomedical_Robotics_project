@@ -41,6 +41,13 @@ Probe probe_init = {
 // Axial Head Translation range : -145.01 - 0.00
 // Axial Feet Translation range : -70.00 - 75.01 -> Experimental range from -7 to 233 inclusive
 double i{}, j{}, k{}; //counter initialization
+const double pi{3.141};
+const double RyF_max{-37}; // Pitch rotation max
+const double RyB_max{+30}; // Pitch rotation min
+const double Rx_min{-90};  // Yaw rotation min
+const double Rx_max{0};    // Yaw rotation max
+const double Pi_min{0};    // Probe insertion min
+const double Pi_max{40};   // Probe insertion max
 
 int nan_checker_row{};
 int nan_checker_col{};
@@ -63,6 +70,7 @@ int nan_ckecker(Neuro_FK_outputs FK)
     }
     return 0;
 };
+
 Eigen::Matrix4d registration()
 {
     Eigen::Vector3d T;
@@ -144,9 +152,11 @@ Eigen::Matrix4d registration()
 // This script calculates the desired joint values for joints 1-3 to place the RCM in the entry point
 int main()
 {
+    NeuroKinematics Forward(&probe_init);
+    ofstream myout("sub.xyz");
+
     while (true)
     {
-        NeuroKinematics Forward(&probe_init);
 
         Eigen::Vector4d entryPointScanner{};
         std::cout << "Enter Desired X value :";
@@ -174,7 +184,7 @@ int main()
             std::cout << "IK values for AxialHeadTranslation :" << IK.AxialHeadTranslation << std::endl;
             std::cout << "IK values for AxialFeetTranslation :" << IK.AxialFeetTranslation << std::endl;
             std::cout << "IK values for LateralTranslationition :" << IK.LateralTranslation << std::endl;
-            // =================================Desired point checker =============================================================================
+            // ================================= Desired point checker =============================================================================
             // NeuroKinematics Forward(&probe_init);
             Eigen::Vector4d Input_robot;
             ProbeInsertion = 31.5;
@@ -196,7 +206,93 @@ int main()
             std::cout << "X Position :" << FK.zFrameToTreatment(0, 3) << std::endl;
             std::cout << "Y Position :" << FK.zFrameToTreatment(1, 3) << std::endl;
             std::cout << "Z Position :" << FK.zFrameToTreatment(2, 3) << std::endl;
-            // i = false;
+
+            // ================================= Sub-Workspace generator =============================================================================
+            // for (k = Pi_min + 2; k <= Pi_max; k += 2)
+            // {
+            //     ProbeInsertion += 2;
+            //     for (i = 0; i >= Rx_min; i -= 3) // outer surface
+            //     {
+            //         YawRotation = i * pi / 180;
+            //         for (j = RyF_max; j <= RyB_max; j += 1.5) //4.5
+            //         {
+            //             PitchRotation = j * pi / 180;
+
+            //             FK = Forward.ForwardKinematics(Input_robot(0), Input_robot(1),
+            //                                            Input_robot(2), ProbeInsertion,
+            //                                            ProbeRotation, PitchRotation, YawRotation);
+            //             nan_ckecker(FK);
+            //             myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+            //         }
+            //     }
+            // }
+            // we have two case one at the bottom of the cone where the PI is max
+            // Another for the surface where PI is less than max
+            // case where PI is max:
+
+            // Loop for creating the bottom of Sub-Workspace
+            for (i = 0; i >= Rx_min; i -= 3) // outer surface
+            {
+                YawRotation = i * pi / 180;
+                for (j = RyF_max; j <= RyB_max; j += 1.5) //4.5
+                {
+
+                    PitchRotation = j * pi / 180;
+
+                    FK = Forward.ForwardKinematics(Input_robot(0), Input_robot(1),
+                                                   Input_robot(2), ProbeInsertion + Pi_max,
+                                                   ProbeRotation, PitchRotation, YawRotation);
+                    nan_ckecker(FK);
+                    myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+                }
+            }
+            // Loop for creating the Sides of Sub-Workspace
+            for (k = Pi_min + 2; k <= Pi_max; k += 2)
+            {
+                ProbeInsertion += 2;
+                for (i = 0; i >= Rx_min; i -= 3) // outer surface
+                {
+                    YawRotation = i * pi / 180;
+                    for (j = RyF_max; j <= RyB_max; j += 67) //4.5
+                    {
+                        PitchRotation = j * pi / 180;
+
+                        FK = Forward.ForwardKinematics(Input_robot(0), Input_robot(1),
+                                                       Input_robot(2), ProbeInsertion,
+                                                       ProbeRotation, PitchRotation, YawRotation);
+                        nan_ckecker(FK);
+                        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+                    }
+                }
+            }
+            ProbeInsertion = ProbeInsertion - 40;
+            for (k = Pi_min + 2; k <= Pi_max; k += 2)
+            {
+                ProbeInsertion += 2;
+
+                for (j = RyF_max; j <= RyB_max; j += 4.5) //4.5
+                {
+                    PitchRotation = j * pi / 180;
+
+                    for (i = 0; i >= Rx_min; i -= 90) // outer surface
+                    {
+                        YawRotation = i * pi / 180;
+
+                        FK = Forward.ForwardKinematics(Input_robot(0), Input_robot(1),
+                                                       Input_robot(2), ProbeInsertion,
+                                                       ProbeRotation, PitchRotation, YawRotation);
+                        nan_ckecker(FK);
+                        myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+                    }
+                }
+            }
+            // just a single point for the the top of the workspace
+            FK = Forward.ForwardKinematics(Input_robot(0), Input_robot(1),
+                                           Input_robot(2), ProbeInsertion - 40,
+                                           ProbeRotation, PitchRotation, YawRotation);
+            nan_ckecker(FK);
+            myout << FK.zFrameToTreatment(0, 3) << " " << FK.zFrameToTreatment(1, 3) << " " << FK.zFrameToTreatment(2, 3) << " 0.00 0.00 0.00" << endl;
+
             break;
         }
         else
@@ -204,6 +300,6 @@ int main()
             std::cout << "Your entry point is out of reach! Please choose another point and try again!" << std::endl;
         }
     }
-
+    myout.close();
     return 0;
 }
