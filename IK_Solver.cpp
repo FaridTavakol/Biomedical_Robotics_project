@@ -63,6 +63,83 @@ int nan_ckecker(Neuro_FK_outputs FK)
     }
     return 0;
 };
+Eigen::Matrix4d registration()
+{
+    Eigen::Vector3d T;
+    Eigen::Matrix4d _registration;
+    _registration << 1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1;
+    char selectionR{};
+    char selectionT{};
+    bool w{true};
+    while (w == true)
+    {
+        std::cout << "\nIs the rotation matrix Identity? (y/n)" << std::endl;
+        std::cin >> selectionR;
+
+        if (selectionR == 'y') // in case of Identity matrix
+        {
+            std::cout << "Is the translational component zero? (y/n)" << std::endl;
+            std::cin >> selectionT;
+            if (selectionT == 'y') // Translational component is zero
+            {
+                _registration << 1, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1;
+
+                w = false;
+            }
+
+            else if (selectionT == 'n') // Translational component is non-zero
+            {
+                for (i = 0; i <= 2; ++i)
+                {
+                    std::cout << "Enter the value of " << i << " :" << std::endl;
+                    std::cin >> T(i);
+                }
+                _registration << 1, 0, 0, T(0),
+                    0, 1, 0, T(1),
+                    0, 0, 1, T(2),
+                    0, 0, 0, 1;
+                w = false;
+            }
+            else
+            {
+                std::cout << "Please select y for yes or n for no!" << std::endl;
+            }
+        }
+
+        else if (selectionR == 'n') // in case of different Rotation matrix
+        {
+            std::cout << "Enter your values for the rotation matrix" << std::endl;
+            for (i = 0; i < 3; ++i) // Loop for checking NaN
+            {
+                for (j = 0; j < 3; ++j)
+                {
+                    std::cout << "Enter Desired value for row " << i << " and column " << j << " : ";
+                    std::cin >> _registration(i, j);
+                }
+            }
+            // asking for the Translational component
+            std::cout << "Is the translational component zero? (y/n)" << std::endl;
+            std::cin >> selectionT;
+            if (selectionT == 'n') // Translational component is zero
+            {
+                for (i = 0; i <= 2; ++i)
+                {
+                    std::cout << "Enter the value of " << i << " :" << std::endl;
+                    std::cin >> T(i);
+                    _registration(i, 3) = T(i);
+                }
+            }
+            w = false;
+        }
+    }
+    return _registration;
+};
 // Y range in the robot frame should be between 158.5 mm - 218
 // This script calculates the desired joint values for joints 1-3 to place the RCM in the entry point
 int main()
@@ -82,11 +159,13 @@ int main()
 
         // An arbitrary Registration matrix is selected. This matrix is dependant of the Imager
         Eigen::Matrix4d _registration;
-        _registration = (Eigen::Matrix4d() << 1, 0, 0, 0,
-                         0, 1, 0, 0,
-                         0, 0, 1, 0,
-                         0, 0, 0, 1)
-                            .finished();
+
+        // _registration = (Eigen::Matrix4d() << 1, 0, 0, 0,
+        //                  0, 1, 0, 0,
+        //                  0, 0, 1, 0,
+        //                  0, 0, 0, 1)
+        //                     .finished();
+        _registration = registration();
         Eigen::Vector4d zFrameToEntry = _registration.inverse() * entryPointScanner;
         if (zFrameToEntry(1) >= 158.5 && zFrameToEntry(1) <= 218)
         {
